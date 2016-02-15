@@ -1,0 +1,40 @@
+//Write  program about Quadratic Equation...
+// producted by UON HINSY  ID:65130105 on Saturday/11/04/2015
+#include<iostream>
+#include<conio.h>
+#include<cmath>
+using namespace std;
+void QuadEquation(double a, double b, double c){
+	double  delta;
+	delta= b*b -4*a*c;
+	if(delta==0){
+		cout<<"\n";
+		cout<<"x1=x2="<<-b/(2*a);
+	
+	}
+	else if(delta>0){
+		cout<<"\n";
+		cout<<"x1="<<(-b+sqrt(delta))/(2*a);
+		cout<<"\nx2="<<(-b-sqrt(delta))/(2*a);
+	}
+	else{
+		cout<<"\n";
+		cout<<"Equation No root!"<<endl;
+	}
+}
+int  main(){
+	double a, b, c;
+	cout<<"!!!This program is used to find Root of  Quadratic Equation !!!\n\n";
+	cout<<"Enter Value For a, b, c To ax^2+bx+c=0 that 1>=a<=-1: "<<endl;
+	cout<<"Enter value a  different zero: ";
+	cin>>a;
+	while(a==0 ){
+		cout<<"Re-Enter value a: ";
+		cin>>a;
+	}
+	cout<<"Enter value b, c: ";
+	cin>>b>>c;
+
+	QuadEquation(a, b,c);
+	return 0;
+}
