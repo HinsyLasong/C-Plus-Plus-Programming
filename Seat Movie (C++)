@@ -1,0 +1,187 @@
+#include<iostream>
+#include<iomanip>
+#include<cctype>
+using namespace std;
+
+const int ROWS=10;// NUMBER OF ROWS
+const int COLS=20;// number of column
+const char TAKEN='-';
+const char AVAIL='#';
+void initialSeats(char map[][COLS]);
+void mapSeats(char map[][COLS]);
+void seatsPrice(double rPrice[]);
+void countAvail(char map[][COLS], int a[]);
+void countTaken(char map[][COLS], int a[]);
+
+int main()
+{
+	int num;
+	double rowPrice[ROWS];
+	char seatMap[ROWS][COLS];
+	int numAvail[ROWS];
+	int numTaken[ROWS];//Number of taken
+	int menus;
+	char rows;
+	int cols;
+	bool flag=1;
+	int sum, sumAvail, total, solds;
+	sum=total=0;
+	initialSeats(seatMap);
+	mapSeats(seatMap);
+	seatsPrice(rowPrice);//Input price for each row
+	for(int i=0; i<ROWS; i++)
+	{
+		numAvail[i]=0;
+		numTaken[i]=0;
+		
+	}
+	cout<<endl;
+	do
+		{
+			cout<<"MOVIE THEATER MENU\n";
+			cout<<"------------------\n";
+			cout<<"1. Sell tickets"<<endl;
+			cout<<"2. Number of tickets sold"<<endl;
+			cout<<"3. Number of available seats in each row"<<endl;
+			cout<<"4. Number of all available seats"<<endl;
+			cout<<"5. Toatal ticket sales "<<endl;
+			cout<<"6. Quit program"<<endl;
+			cin>>menus;
+			while(menus<1 || menus>6)
+			{
+				cout<<"Invalid option!\n";
+				cout<<"Input option:";
+				cin>>menus;
+				
+			}
+			switch(menus)
+			{
+				case 1:
+					cout<<"How many seat(s)?:";
+					cin>>num;
+					cout<<"Enter row number and seat number for the ticket:\n";
+					for(int i=0; i<num; i++)
+					{
+						cout<<"Row #:";
+						cin>>rows;
+						cout<<"Seat #:";
+						cin>>cols;
+						while(seatMap[int(rows)-int('A')][cols]== TAKEN)
+						{
+							cout<<"This seat is taken! Try another one.\n";
+							cout<<"Row #:";
+							cin>>rows;
+							cout<<"Seat #:";
+							cin>>cols;
+							
+						}
+						sum +=rowPrice[int(rows)-int('A')];
+					//	seatMap[int(rows)-int('A')[cols]]=TAKEN;
+					}
+					cout<<"Ticket(s) cost(s) $"<<sum<<endl;
+					mapSeats(seatMap);
+					sum=0;
+					cout<<endl;
+					break;
+				case 2:
+					countTaken(seatMap, numTaken);
+					solds=0;
+					for(int i=0; i<ROWS; i++)
+						solds +=numTaken[i];
+					cout<<"Number of tickets sold:"<<solds<<endl;
+					break;
+						
+				case 3:
+					cout<<"Number of seats available in each row\n";
+					countAvail(seatMap, numAvail);
+					for(int i=0; i<ROWS; i++)
+						cout<<"ROW"<<char('A'+i)<<":"<<numAvail[i]<<"Seats"<<endl;
+					break;
+				case 4:
+					countAvail(seatMap, numAvail);
+					sumAvail=0;
+					for(int i=0; i<ROWS; i++)
+						sumAvail += numAvail[i];
+					cout<<"Number of all available seats:"<<sumAvail<<endl;
+					
+					break;
+				case 5:
+					total=0;
+					for(int i=0; i<ROWS; i++)
+						total +=numTaken[i] * rowPrice[i];
+					cout<<"Total Ticket sale price: $"<<total<<endl;
+					break;
+				case  6:
+					flag=0;
+					break;
+						
+			}
+			cout<<endl;
+			
+		}while(flag==1);
+		cout<<endl;
+		return 0;
+}
+
+void initialSeats(char map[][COLS])
+{
+	for(int i=0; i<ROWS; i++)
+	{
+		for(int j=0; j<COLS; j++)
+		{
+			map[i][j]=AVAIL;
+			
+		}
+		
+	}
+}
+		
+void mapSeats(char map[][COLS])
+{
+	cout<<"/t/t/tSeats\n\n";
+	cout<<setw(5)<<"";
+	for(int i=0; i<COLS; i++) 
+	{
+		cout << setw(3) << i ;
+	}
+	cout << endl;
+	for(int i=0; i<ROWS; i++)
+	{
+		cout<<endl<<"Row"<< static_cast<char>('A'+i);
+		cout<<setw(10);
+		for(int j=0; j<COLS; j++)
+		{
+			cout<<setw(3)<<map[i][j];
+		}
+		cout<<endl;
+	}
+}
+void seatsPrice(double rPrice[])
+{
+	cout<<"Enter a ticket price for each row.\n";
+	for(int i=0; i<ROWS; i++)
+	{
+		cout<<"Row"<<char('A'+i)<<":";
+		cin>>rPrice[i];
+	}
+}
+void countTaken(char map[][COLS], int a[])
+{
+	for(int i=0; i<ROWS; i++)
+		a[i]=0;
+	for(int i=0; i<ROWS; i++)
+		for(int j=0; j<COLS; j++)
+		if(map[i][j]==TAKEN)
+		a[i]++;
+}	
+void countAvail(char map[][COLS], int a[])
+{
+	for(int i=0; i<ROWS; i++)
+		a[i]=0;
+	for(int i=0; i<ROWS; i++)
+		for(int j=0; j<COLS; j++)
+		if(map[i][j]==AVAIL)
+		a[i]++;
+}
+
+
