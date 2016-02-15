@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+int main(){
+	int a, b;
+	cout<<"Input numbers: ";
+	cin>>a>>b;
+	if(a<b){
+		cout<<"This is Minimum number: "<<a;
+		
+	}
+	else{
+		cout<<"This is minimum number: "<<b;
+	}
+	return 0;
+}
