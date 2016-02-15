@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cstring>
+//3#include<string>
+using namespace std;
+int main()
+{
+	int m, n;
+	int size=20; 
+	 char word[size]; 
+	 char *ptr=word;  
+	 	cout<<"This is used to writing about programming for string.";
+	 	cout<<"\n-----------------------------------------------------";
+		cout<<"\n\nInput any Strings: ";
+		gets(ptr);   
+		cout<<"\nReverse of the strings is: ";
+
+		for(m=1; *(word+m)!='\0'; m++);
+			for(n=m-1; n>=0; n--)
+				cout<<*(word+n);
+			
+		cout<<"\n";
+
+
+	return 0;
+} 
