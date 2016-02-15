@@ -1,0 +1,137 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+using namespace std;
+struct Account
+{
+	string name; 
+	string address; 
+	string phone; 
+	double balance; 
+	string date;
+}; 
+void getCustomer(Account *c, int n);
+void changeCustomer(Account *c);
+void displayCustomer(Account  *c, int n);
+int main()
+{
+	const int NUMBER = 3;
+	int menu, num;
+	
+	bool flag = true;
+	Account customer[NUMBER];
+	Account *ptr=customer;
+	do
+	{
+		cout <<"\n\tMenu\n\n"
+			 <<"--------------------------\n";
+		cout << "1. Input Data" << endl;
+		cout << "2. Change Content" << endl;
+		cout << "3. Display All" << endl;
+		cout << "4. Exit" << endl;
+		cout <<"--------------------------\n\n";
+		cout << " Please Choose Menu: "; 
+		cin >> menu;
+		switch(menu)
+		{
+			case 1: 
+				getCustomer(customer, NUMBER);
+				break;
+			
+			case 2: 
+				cout << "Enter customer number to change: "; 
+				cin >> num;
+				changeCustomer(customer+num-1);
+				break;
+				
+			case 3: 
+				displayCustomer(customer, NUMBER);
+				break;
+				
+			case 4: 
+				flag = false;
+				break;
+		} 
+		if(!flag)
+			break;
+	}while(flag);		
+}
+void getCustomer(Account *c, int n)
+{
+	for(int i=0; i<n; i++)
+	{
+		cin.ignore();
+		cout << "Customer's " << i+1 << " Name: "; 
+		getline(cin,  (c+i)->name); 
+		cout << "Customer's " << i+1 << " Address: "; 
+		getline(cin,  (c+i)->address); 
+		cout << "Customer's " << i+1 << " Phone: "; 
+		getline(cin,  (c+i)->phone);
+		cout << "Customer's " << i+1 << " Balance: $ "; 
+		cin >>  (c+i)->balance;
+		cout << "Customer's " << i+1 << " Date: "; 
+		cin >>  (c+i)->date;
+	}
+}
+void changeCustomer(Account *c)
+{
+	cin.ignore();
+	char option;
+	
+	cout << "n. To change name." << endl;
+	cout << "a. To change address." << endl;
+	cout << "p. To change phone." << endl;
+	cout << "b. to change balace." << endl;
+	cout << "d. to change date." << endl;
+	cout << "Your option to change: "; 
+	cin >> option;
+	switch(option)
+	{
+		case 'n': 
+			cout << "Customer Name: ";
+			cin.ignore();
+			getline(cin, c->name);
+			break;
+		case 'a':
+			cout << "Customer Address: "; 
+			cin.ignore();
+			getline(cin, c->address);
+			break;
+		case 'p':
+			cout << "Customer Phone: "; 
+			cin.ignore();
+			getline(cin, c->phone);
+			break;
+		case 'b':
+			cout << "Customer Balance: $ "; 
+			cin.ignore();
+			cin >> c->balance;
+			break;
+		case 'd':
+			cout << "Last date of payment: "; 
+			cin.ignore();
+			cin >> c->date;
+			break;
+		default: 
+			break;	
+	}	
+}
+void displayCustomer(Account  *c, int n)
+{
+	cout 	<< left << setw(5) << "No."
+			<< left << setw(15) << "Name"
+			<< setw(15) << "Address"
+			<< setw(15) << "Phone"
+			<< setw(15) << "Balance"
+			<< setw(15) << "Date" << endl;
+	for(int i=0; i<n; i++)
+	{
+		cout  << left << setw(5) <<  (i+1)
+				<< left << setw(15) <<  (c+i)->name
+				<< setw(15) << 	(c+i)->address
+				<< setw(15) <<  (c+i)->phone
+				<< setw(15) <<  (c+i)->balance
+				<< setw(15) <<  (c+i)->date << endl;
+	}
+}
+
