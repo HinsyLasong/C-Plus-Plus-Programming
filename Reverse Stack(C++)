@@ -1,0 +1,22 @@
+   //This program is use to reverse string by using Stack....
+   //Made by : Mr. Uon Hinsy on Monday//16/June/2015....
+    #include <iostream>
+    #include <stack>
+    using namespace std;
+   
+    int main()
+    {    
+      stack<char> s;
+      char a;
+      cout<<"This program is use to reverse character by using stack..."<<endl;
+      cout<<"----------------------------------------------------------";
+      cout << "\nEnter Character Stack: "  ;
+      while ( cin.get ( a ) && a != '\n' )
+        s.push(a);
+      cout<<"\nReverse Stack:";
+      while ( !s.empty() ) {
+        cout << s.top();
+        s.pop();
+      }
+      cout<<'\n';
+    }
