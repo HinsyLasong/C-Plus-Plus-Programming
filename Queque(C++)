@@ -1,0 +1,72 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+/*void menu(){
+	1.Enqueue
+	2.Desqueue
+	3.Display
+}*/
+//typedef int n=5;
+class queue1{
+	int queues[5];
+	int tail, head;
+	public:
+		queue1(){
+			tail=-1;
+			head=-1;
+		}
+		void insert(int x){
+			if(tail>4){
+				cout<<"Queue over flow";
+				head=tail=-1;
+				return;
+			}
+			queues[++tail]=x;
+			cout<<"\nInserted:"<<x<<"  ";
+		}
+		void delet(){
+			if(head==tail){
+				cout<<"Queue under flow";
+				return;
+			}
+			cout<<"deleted:"<<queues[++head];
+		}
+		void display(){
+			if(tail==head){
+				cout<<"Queue is empty";
+				return;
+			}
+			cout<<"Your Elements:";
+			for(int i=head+1; i<=tail;i++){
+				cout<<queues[i]<<" ";
+			}
+			cout<<"\n";
+		}
+};
+int main(){
+	int ch;
+	queue1 q;
+	while(1){
+		cout<<"\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n";
+		cout<<"Input Option above:";
+		cin>>ch;
+		switch(ch){
+			case 1:
+				cout<<"Enter your element:";
+				cin>>ch;
+				q.insert(ch);
+				break;
+			case 2:
+				q.delet();
+				break;
+			case 3:
+				q.display();
+				
+				break;
+			case 4:
+				exit(0);
+		}
+	
+	}
+		return 0;
+}
