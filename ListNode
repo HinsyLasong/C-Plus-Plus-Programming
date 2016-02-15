@@ -1,0 +1,122 @@
+#include   <iostream>
+#include   <ctime>
+using namespace std;
+
+// OrderedLL class
+template<class T>
+class   OrderedLL
+{
+private: 
+struct NODE
+{
+    string  sName;
+    int sHours;
+    NODE    *next;
+};
+NODE    *list;
+NODE    *rear;
+
+public:
+// Constructor
+OrderedLL () { list = rear =  NULL;}
+
+// Insert item x -------------------------------------
+void    Insert(string x, int y)
+{
+    NODE *r;
+    // Create a new node
+    r = new(NODE); r->sName = x; r->sHours = y;
+    r->next = NULL;
+    // Inserts the item into the list
+    r->next = list;
+    list = r;
+}
+
+// Display the linked list --------------------------
+void display()
+{ NODE *p = list;
+while( p != NULL)
+    { cout << p->sName << "/" << p->sHours << "-->"; p = p->next;}
+cout << "NULL\n";
+}
+
+// Delete x from the linked list --------------------
+void DeleteNode(T x)
+{
+NODE *p = list, *r = list;
+while( p->info != x) {r=p; p=p->next; }
+if( p == list)
+    { // delete the first node
+    list = p->next; delete(p);
+    }
+    else
+    { r->next = p->next; delete(p);}
+}
+
+// Sort by hours ------------------------------------
+void    sortHours()
+{
+NODE    *p, *q;
+
+
+
+}
+
+// Display the total hours --------------------------
+friend  T   totHours(OrderedLL  LL)
+{
+    NODE    *p;
+    int total = 0;  
+
+    p = LL.list;
+    while(p != NULL)
+    {
+        total += p->sHours;
+        p = p->next;
+    }
+    cout << "Total spending time = " << total << endl;
+}
+
+
+
+
+
+}; // end of OrderedLL class
+
+int main(void)
+{
+    // Declare variables
+time_t          a;
+OrderedLL<int>      unsortedLL;
+OrderedLL<int>      sortedLL;
+int         inHours;
+string          inName;
+
+
+
+
+// Displays the current time and date
+time(&a);
+cout << "Today is " << ctime(&a) << endl;
+
+// Asks the user to enter a name and hours 5 times, inserting each entry
+// into the queue
+for(int i = 0; i < 5; i++)
+{
+    cout << "Enter name and Time: ";
+    cin >> inName >> inHours;
+    unsortedLL.Insert(inName, inHours);
+}
+
+// Displays the unsorted list
+cout << "\nWaiting List-->";
+unsortedLL.display();
+totHours(unsortedLL);
+
+// Calls for the function to sort the list into a queue by hours
+unsortedLL.sortHours();
+
+unsortedLL.display();
+return 0;
+
+} // End of "main"
