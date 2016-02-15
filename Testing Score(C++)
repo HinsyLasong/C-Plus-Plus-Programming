@@ -1,0 +1,82 @@
+/* This program uses dynamic memory allocation and pointer
+notation to sort the test score in acending order.
+*/
+#include<iostream>
+#include<iomanip>
+#include<string>
+using namespace std; 
+// Function prototypes
+void sortTests(string *ptrNames, int *ptrTests, int n); // Sorts the number
+void showTests(string *ptrNames, int *ptrTests, int n); // Display the number
+double average(int *ptrTests, int n);  // Find the average
+int main()
+{
+	const int NUM_TESTS = 3; // Number of tests
+	const int NUM_STUDENTS = 3; 
+	int *tests; 
+	string *names; 
+	tests = new int[NUM_TESTS];
+	names = new string[NUM_STUDENTS];
+	cout << "Input the name and tests score.\n"; 
+	for(int i=0; i<NUM_TESTS; i++)
+	{
+		cout << "Student " << i+1 << "#: ";
+		cin >> *(names + i); 
+		cout << "Test " << i+1 << "#: "; 
+		cin >> *(tests+i); 
+	}
+	cout << "Student & Tests score before sorted\n"; 
+	showTests(names, tests, NUM_TESTS); 
+	sortTests(names, tests, NUM_TESTS);
+	cout << "Tests score after sorted\n"; 
+	showTests(names, tests, NUM_TESTS); 
+	cout << setprecision(2) << fixed << showpoint; 
+	cout << "Average test score is " << average(tests, NUM_TESTS) << endl;
+	delete [] tests;
+	delete [] names;
+	tests = 0;
+	names = 0;
+	return 0; 
+}
+void showTests(string *ptrNames, int *ptrTests, int n)
+{
+	cout  << left << setw(5) << "No." 
+			<< left << setw(10) << "Name"
+			<< left << setw(10) << "Score" << endl;
+	for(int i=0; i<n; i++){
+		cout 	<< left << setw(5) << i+1
+				<< left << setw(10) << *(ptrNames + i)
+				<< left << setw(10) << *(ptrTests+i) << endl;
+	}
+}
+void sortTests(string *ptrNames, int *ptrTests, int n)
+{
+	int swapTest;
+	string swapName;
+	for(int i=1; i<n; i++)
+	{
+		for(int j=0; j<n-1; j++)
+		{
+			if(*(ptrTests+j) > *(ptrTests+j+1) || *(ptrNames+j)>*(ptrNames+j+1))
+			{
+				swapTest = *(ptrTests+j);
+				swapName = *(ptrNames+j);
+				*(ptrTests+j) = *(ptrTests+j+1);
+				*(ptrNames+j) = *(ptrNames+j+1); 
+				*(ptrTests+j+1) = swapTest;
+				*(ptrNames+j+1) = swapName; 
+			}
+		}
+	}
+}
+double average(int *ptrTests, int n)
+{
+	int sum = 0;
+	int i=0; 
+	while(i<n)
+	{
+		sum+=*ptrTests++;
+		i++;
+	}
+	return static_cast<double>(sum) / n;
+}
