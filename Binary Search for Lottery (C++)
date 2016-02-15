@@ -1,0 +1,72 @@
+#include<iostream>
+#include<ctime>
+#include<cstdlib>
+#include<iomanip>
+void displayNumbers(int *list, int size);
+int binarySearch(int *list, int *n, int size);
+using namespace std; 
+int main()
+{
+	const int SIZE = 10;
+	int index;
+	int numbers[SIZE] = {0, 9, 38, 45, 50, 
+								53, 65, 73, 89,97};
+	int val; 
+	srand(time(0)); 
+	cout << "Your lucky numbers are: \n";
+	displayNumbers(numbers, SIZE); 
+	val = rand() % 100;
+	cout.fill('0'); 
+	cout.width(2);
+	cout << "This week number is : " << val << endl; 
+	
+	index = binarySearch(numbers, &val, SIZE);
+	if(index != -1)
+	{
+		cout << "Congratulation!, You win.\n";
+		cout << val << " is in position " << index + 1 << endl; 
+	}else {
+		cout << val << " is not in the list.\n";
+	} 
+	
+	return 0;
+}
+void displayNumbers(int *list, int size)
+{
+	 
+	
+	for(int i=0; i<size; i++)
+	{	
+		cout.fill('0');
+		cout.width(2);
+		cout << *(list + i) << " ";
+	}
+	cout << endl;
+}
+int binarySearch(int *list, int *n, int size)
+{
+	int first = 0; 
+	int last = size - 1;
+	int middle;
+	int position = -1; 
+	bool found = false; 
+	for(; ;) // while(true)
+	{
+		middle = (first + last)/2;
+		if(*n == *(list+middle))
+		{
+			found = true; 
+			position = middle;
+			break;
+		}
+		else if(*n < *(list+middle))
+		{
+			last = middle - 1;
+		}else{
+			first = middle + 1;
+		}
+		if(first > last)
+			break;
+	}
+	return position;
+}
