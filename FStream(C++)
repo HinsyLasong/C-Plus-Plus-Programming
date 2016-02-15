@@ -1,0 +1,31 @@
+#include<iostream>
+#include<fstream>
+#include<string>
+#include<cstdlib>
+#include<iomanip>
+
+using namespace std;
+
+void showContent(fstream &file);
+int main()
+{
+	fstream outputfile("strings.txt");
+	showContent(outputfile);
+	return 0;
+}
+void showContent(fstream &file){
+	int i=1;
+	string line;
+	if(!file){
+		cout<<"The file does not exist.\n";
+	}else{
+		while(getline(file, line)){
+			cout<<i<<":"<< setw(5)<<line<<endl;
+			i++;
+			if(i%6==0)
+		
+			system("pause");
+	}
+		cout<<setw(10)<<"\n\t\tPress any key to continue....";
+	}
+}
