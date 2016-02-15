@@ -1,0 +1,149 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+using namespace std;
+struct Employee
+{
+	string id,name; 
+	string sex; 
+	string dob, position; 
+	double salary; 
+	
+}; 
+void getEmployee(Employee *c, int n);
+void changeEmployee(Employee *c);
+void displayEmployee(Employee  *c, int n);
+int main()
+{
+	const int NUMBER = 3;
+	int menu, num;
+	
+	bool flag = true;
+	Employee employee[NUMBER];
+	Employee *ptr=employee;
+	do
+	{
+		cout <<"\n\tMenu\n\n"
+			 <<"--------------------------\n";
+		cout << "1. Input Data of Employee" << endl;
+		cout << "2. Change Content of Employee" << endl;
+		cout << "3. Display All" << endl;
+		cout << "4. Exit" << endl;
+		cout <<"--------------------------\n\n";
+		cout << " Please Choose Menu: "; 
+		cin >> menu;
+		switch(menu)
+		{
+			case 1: 
+				getEmployee(employee, NUMBER);
+				break;
+			
+			case 2: 
+				cout << "Enter customer number to change: "; 
+				cin >> num;
+				changeEmployee(employee+num-1);
+				break;
+				
+			case 3: 
+				displayEmployee(employee, NUMBER);
+				break;
+				
+			case 4: 
+				flag = false;
+				break;
+		} 
+		if(!flag)
+			break;
+	}while(flag);		
+}
+void getEmployee(Employee *c, int n)
+{
+	for(int i=0; i<n; i++)
+	{
+		cin.ignore();
+		cout << "Employee's " << i+1 << " ID: "; 
+		getline(cin,  (c+i)->id); 
+		cout << "Employee's " << i+1 << " Name: "; 
+		getline(cin,  (c+i)->name); 
+		cout << "Employee's " << i+1 << " Sex: "; 
+		getline(cin,  (c+i)->sex);
+		cout << "Employee's" << i+1 << " DOB: "; 
+		getline(cin,  (c+i)->dob); 
+		cout << "Employee's " << i+1 << " Position: "; 
+		getline(cin,  (c+i)->position);
+		cout << "Employee's " << i+1 << " Salary: $ "; 
+		cin >>  (c+i)->salary;
+	
+	}
+}
+void changeEmployee(Employee *c)
+{
+	cin.ignore();
+	char option;
+	
+	cout << "i. To change id." << endl;
+	cout << "n. To change name." << endl;
+	cout << "G. To change sex." << endl;
+	cout << "d. To change DOB." << endl;
+	cout << "p. to change posion." << endl;
+	cout << "s. to change salary." << endl;
+	cout << "Your option to change: "; 
+	cin >> option;
+	switch(option)
+	{
+		case 'i': 
+			cout << "Employee ID: ";
+			cin.ignore();
+			getline(cin, c->id);
+			break;
+		case 'n': 
+			cout << "Employee Name: ";
+			cin.ignore();
+			getline(cin, c->name);
+			break;
+		case 'g':
+			cout << "Employee Sex: "; 
+			cin.ignore();
+			getline(cin, c->sex);
+			break;
+		case 'd':
+			cout << "Employee DOB: "; 
+			cin.ignore();
+			getline(cin, c->dob);
+			break;
+		case 'p':
+			cout << "Employee Position: "; 
+			cin.ignore();
+			cin >> c->position;
+			break;		
+		case 's':
+			cout << "Customer Salary: $ "; 
+			cin.ignore();
+			cin >> c->salary;
+			break;
+		
+		default: 
+			break;	
+	}	
+}
+void displayEmployee(Employee *c, int n)
+{
+	cout 	<< left << setw(5) << "No."
+			<< left<<setw(15) << "ID"
+			<< setw(15) << "Name"
+			<< setw(15) << "Sex"
+			<< setw(15) << "DOB"
+			<< setw(15) << "Position"
+			<< setw(15) << "Salary" << endl;
+	for(int i=0; i<n; i++)
+	{
+		cout  << left << setw(5) <<  (i+1)
+				<< left << setw(15) <<  (c+i)->id
+				<< setw(15) << 	(c+i)->name
+				<< setw(15) << 	(c+i)->sex
+				<< setw(15) <<  (c+i)->dob
+				<< setw(15) <<  (c+i)->position
+				<< setw(15) <<  (c+i)->salary << endl;
+	}
+}
+
