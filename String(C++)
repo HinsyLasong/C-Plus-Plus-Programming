@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cstring>
+#include<cctype>
+//3#include<string>
+using namespace std;
+int main()
+{
+	int m, n;
+	 char word[30]; 
+	 char *ptr=word;  
+		cout<<"Input any Strings: ";
+		gets(ptr);
+		cout<<"\nSome strings include spaces : "<<strlen(ptr)<<endl;  
+	
+
+		for(m=0; *(word+m)!='\0'&& word[m]!=' ' ; m++)
+			for(n=m-2; n=='\0'; n--)
+				cout<<strlen(ptr);
+			cout<<"\nsome string not include spaces and symbols: "<<strlen(ptr)-m+n;
+			
+		cout<<"\n";
+
+
+	return 0;
+} 
